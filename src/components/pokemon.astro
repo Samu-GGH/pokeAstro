@@ -1,0 +1,41 @@
+---
+const lista = [];
+
+for (let id = 1; id <= 151; id++) {
+  const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+  const pokemon = await res.json();
+  lista.push(pokemon);
+}
+---
+
+<div
+  class="contenedor inline-grid relative w-full grid-cols-3 grid-flow-row auto-rows-[306px] gap-5 py-5 px-2"
+>
+  {
+    lista.map((pokemon) => (
+      <div class="pokemon inline-flex relative max-[500px]:col-span-full bg-gray-200 border-2 border-gray-400 hover:bg-yellow-300 duration-100 rounded-lg justify-evenly place-items-center flex-wrap grow text-center font-bold text-base md:text-2xl lg:text-4xl basis-[30%] p-5">
+        <div class="pokeNum inline-flex absolute items-center text-center font-bold my-1 mx-2 w-max top-0 left-0">
+          {pokemon.id}
+        </div>
+        <img
+          loading="lazy"
+          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${pokemon.id}.gif`}
+          alt=""
+          class="pokeImage inline-flex relative h-[70%] m-0 p-0 object-none"
+        />
+        <p class="pokeName w-full">
+          {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+        </p>
+        <div class="pokeTypes_Container w-full flex justify-evenly">
+          {pokemon.types?.length > 0 &&
+            pokemon.types.map((tipos: any) => (
+              <span class="px-2 py-1 bg-stone-400 rounded text-base font-semibold">
+                {tipos.type.name.charAt(0).toUpperCase() +
+                  tipos.type.name.slice(1)}
+              </span>
+            ))}
+        </div>
+      </div>
+    ))
+  }
+</div>

@@ -1,0 +1,24 @@
+---
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro Basics</title>
+  </head>
+  <body>
+    <header
+      class="header relative flex justify-evenly place-items-center h-24 w-full p-5 bg-gray-200 border-2 border-gray-400"
+    >
+      <div class="title text-center font-bold text-4xl">POKEDEX</div>
+    </header>
+    <slot />
+    <!--     <script src="../../public/pokemon.js"></script>
+ -->
+  </body>
+</html>
