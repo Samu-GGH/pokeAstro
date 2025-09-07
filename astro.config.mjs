@@ -5,4 +5,5 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   integrations: [tailwind()],
   site: "https://samu-ggh.github.io",
+  base: "/pokeAstro/",
 });
