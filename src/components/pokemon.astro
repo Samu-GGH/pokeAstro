@@ -1,7 +1,7 @@
 ---
 const lista = [];
 
-for (let id = 1; id <= 151; id++) {
+for (let id = 1; id <= 250; id++) {
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
   const pokemon = await res.json();
   lista.push(pokemon);
