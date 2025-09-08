@@ -13,12 +13,13 @@ import "../styles/global.css";
   </head>
   <body>
     <header
-      class="header relative flex justify-evenly place-items-center h-24 w-full p-5 bg-gray-200 border-2 border-gray-400"
+      class="header absolute flex justify-evenly place-items-center h-24 w-full p-5 bg-gray-200 border-b-2 border-gray-400 shadow-[0,0,20px,20px,black]"
     >
       <div class="title text-center font-bold text-4xl">POKEDEX</div>
     </header>
     <slot />
-    <!--     <script src="../../public/pokemon.js"></script>
+    <!--       <div class="modal absolute flex h-[50vh] w-[50vh] m-auto bg-gray-200"></div>
+    <script src="../../public/pokemon.js"></script>
  -->
   </body>
 </html>

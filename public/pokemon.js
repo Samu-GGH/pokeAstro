@@ -4,16 +4,15 @@ fetch(`https://pokeapi.co/api/v2/pokemon/1`)
   .then((datos) => {
     lista.push(datos);
     console.log(lista[0].order.toString());
-    /*console.log(datos.name);
+    console.log(datos.name);
     datos.types.forEach((tipo, jaja, array) => {
       console.log(tipo.type.name);
       // console.log(array[jaja].type.name);
     });
-    lista.push()*/
+    lista.push();
   });
 
-/*let pokemonName = [];
-for (let i = 0; i < 4; i++) {
+/* for (let i = 0; i < 4; i++) {
   fetch(`https://pokeapi.co/api/v2/pokemon/${i + 1}`)
     .then((res) => res.json())
     .then((datos) => {
@@ -31,9 +30,9 @@ for (let i = 0; i < 4; i++) {
 
 async function imprimir() {}
 
-console.log(pokemonName.length);*/
+console.log(pokemonName.length);
 
-/*let pokemonName = [];
+let pokemonName = [];
 for (let i = 0; i < 4; i++) {
   fetch(`https://pokeapi.co/api/v2/pokemon/${i + 1}`)
     .then((res) => res.json())
@@ -49,7 +48,6 @@ for (let i = 0; i < 4; i++) {
       console.log(pokemonName);
     });
 }
-
 
 async function cargarPokemones() {
   const promesas = [];
@@ -80,5 +78,4 @@ cargarPokemones().then((lista) => {
   });
 });
 
-console.log(pokemonList);
-*/
+console.log(pokemonList); */

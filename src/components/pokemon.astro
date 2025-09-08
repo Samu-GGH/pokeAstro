@@ -1,7 +1,7 @@
 ---
 const lista = [];
 
-for (let id = 1; id <= 250; id++) {
+for (let id = 1; id <= 386; id++) {
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
   const pokemon = await res.json();
   lista.push(pokemon);
@@ -9,33 +9,93 @@ for (let id = 1; id <= 250; id++) {
 ---
 
 <div
-  class="contenedor inline-grid relative w-full grid-cols-3 grid-flow-row auto-rows-[306px] gap-5 py-5 px-2"
+  class="contenedor inline-grid relative w-full grid-cols-3 grid-flow-row auto-rows-[306px] md:auto-rows-[250px] lg:auto-rows-[306px] xl:lg:auto-rows-[400px] gap-2 pb-5 pt-[100px] px-2 z-10"
 >
+  <div
+    class="pokeSelec_Container flex fixed h-lvh w-full justify-center items-center overflow-hidden"
+  >
+    <div
+      class="absolute h-0 w-0 xButton overflow-hidden transition-all duration-300"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-8 absolute right-5 top-5 z-30"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18 18 6M6 6l12 12"></path>
+      </svg>
+    </div>
+    <div
+      class="pokeSelec flex relative h-0 w-0 rounded-lg transition-all duration-300"
+    >
+    </div>
+  </div>
+
   {
     lista.map((pokemon) => (
-      <div class="pokemon inline-flex relative max-[500px]:col-span-full bg-gray-200 border-2 border-gray-400 hover:bg-yellow-300 duration-100 rounded-lg justify-evenly place-items-center flex-wrap grow text-center font-bold text-base md:text-2xl lg:text-4xl basis-[30%] p-5">
-        <div class="pokeNum inline-flex absolute items-center text-center font-bold my-1 mx-2 w-max top-0 left-0">
-          {pokemon.id}
-        </div>
-        <img
-          loading="lazy"
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${pokemon.id}.gif`}
-          alt=""
-          class="pokeImage inline-flex relative h-[70%] m-0 p-0 object-none"
-        />
-        <p class="pokeName w-full">
-          {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
-        </p>
-        <div class="pokeTypes_Container w-full flex justify-evenly">
-          {pokemon.types?.length > 0 &&
-            pokemon.types.map((tipos: any) => (
-              <span class="px-2 py-1 bg-stone-400 rounded text-base font-semibold">
-                {tipos.type.name.charAt(0).toUpperCase() +
-                  tipos.type.name.slice(1)}
-              </span>
-            ))}
+      <div class="pokemon_Container inline-flex max-[767px]:col-span-full grow">
+        <div class="pokemon inline-flex relative w-full bg-gray-200 border-2 border-gray-400 hover:bg-yellow-300 duration-300 rounded-lg justify-evenly place-items-start flex-wrap text-center font-bold text-base md:text-2xl lg:text-4xl p-4 z-10">
+          <div class="pokeNum inline-flex absolute items-center text-center font-bold my-1 mx-2 w-max top-0 left-0">
+            {pokemon.id}
+          </div>
+          <img
+            loading="lazy"
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${pokemon.id}.gif`}
+            alt=""
+            class="pokeImage inline-flex relative h-[65%] w-full m-0 p-0 object-none"
+          />
+          <p class="pokeName w-full">
+            {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+          </p>
+          <div class="pokeTypes_Container w-full flex justify-evenly">
+            {pokemon.types?.length > 0 &&
+              pokemon.types.map((tipos: any) => (
+                <span class="px-2 py-1 bg-stone-400 rounded text-base font-semibold">
+                  {tipos.type.name.charAt(0).toUpperCase() +
+                    tipos.type.name.slice(1)}
+                </span>
+              ))}
+          </div>
         </div>
       </div>
     ))
   }
+  <script>
+    const pokemon = document.querySelectorAll(".pokemon");
+    const pokeContainer = document.querySelector(".pokeSelec");
+    const containerFather = document.querySelector(".pokeSelec_Container");
+    const xButton = document.querySelector(".xButton");
+
+    pokemon.forEach((poke, i) => {
+      poke.addEventListener("click", () => {
+        const pokeSelect = pokemon[i].cloneNode(true) as HTMLElement;
+        pokeContainer!.innerHTML = " ";
+        pokeContainer?.appendChild(pokeSelect);
+        pokeContainer!.classList.replace("h-0", "h-[400px]");
+        pokeContainer!.classList.replace("w-0", "w-[400px]");
+        pokeContainer!.classList.add("box-shadow");
+        containerFather!.classList.add("z-30");
+        xButton!.classList.replace("h-0", "h-[400px]");
+        xButton!.classList.replace("w-0", "w-[400px]");
+      });
+    });
+
+    xButton?.addEventListener("click", () => {
+      xButton!.classList.replace("h-[400px]", "h-0");
+      xButton!.classList.replace("w-[400px]", "w-0");
+      pokeContainer!.classList.remove("box-shadow");
+      setTimeout(() => {
+        containerFather!.classList.remove("z-30");
+      }, 300);
+      pokeContainer!.classList.replace("h-[400px]", "h-0");
+      pokeContainer!.classList.replace("w-[400px]", "w-0");
+      pokeContainer!.innerHTML = "";
+    });
+  </script>
 </div>
